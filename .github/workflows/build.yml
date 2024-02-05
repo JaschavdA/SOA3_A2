@@ -44,10 +44,8 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"JaschavdA_SOA3_A2" /o:"jaschavda" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          steps:
-            - task: DotNetCoreCLI@2
-            displayName: Build
-            inputs:
-                command: build
-                projects: '**/*.csproj'
+            steps:
+            - script: dotnet build --configuration
+              displayName: 'dotnet build'
+
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
