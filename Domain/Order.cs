@@ -88,13 +88,14 @@ namespace Domain
         {
             try
             {
-                if (Format == TicketExportFormat.JSON)
+                switch (Format)
                 {
-                    setExportStrategy(new JSONExportStrategy());
-                }
-                else if (Format == TicketExportFormat.PLAINTEXT)
-                {
-                    setExportStrategy(new PlainTextExportStrategy());
+                    case TicketExportFormat.JSON:
+                        setExportStrategy(new JSONExportStrategy());
+                        break;
+                    case TicketExportFormat.PLAINTEXT:
+                        setExportStrategy(new PlainTextExportStrategy());
+                        break;
                 }
                 ExportStrategy?.Export(this);
             } 
