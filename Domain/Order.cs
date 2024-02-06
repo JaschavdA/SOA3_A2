@@ -8,8 +8,8 @@ namespace Domain
         public int OrderNr { get; set; }
         public bool IsStudentOrder { get; set; }
         public List<MovieTicket> MovieTickets { get; set; }
-        
-        public ExportStrategy ExportStrategy { get; set; }
+
+        public ExportStrategy? ExportStrategy { get; set; } = null;
 
         public Order(int OrderNr, bool IsStudentOrder)
         {
@@ -86,15 +86,22 @@ namespace Domain
 
         public void Export(TicketExportFormat Format)
         {
-            if (Format == TicketExportFormat.JSON)
+            try
             {
-                setExportStrategy(new JSONExportStrategy());
-            }
-            else
+                if (Format == TicketExportFormat.JSON)
+                {
+                    setExportStrategy(new JSONExportStrategy());
+                }
+                else if (Format == TicketExportFormat.PLAINTEXT)
+                {
+                    setExportStrategy(new PlainTextExportStrategy());
+                }
+                ExportStrategy?.Export(this);
+            } 
+            catch
             {
-                setExportStrategy(new PlainTextExportStrategy());
+                Console.WriteLine("No export");
             }
-            this.ExportStrategy.Export(this);
         }
 
         public void setExportStrategy(ExportStrategy exportStrategy)
