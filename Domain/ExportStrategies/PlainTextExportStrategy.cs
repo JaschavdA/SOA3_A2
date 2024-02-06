@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,10 @@ namespace Domain.ExportStrategies
 
         public void Export(Order order)
         {
-            File.WriteAllText("C:\\Temp\\test.txt", this.ToString());
+            const string folder = "C:\\export";
+            const string url = $"{folder}\\test.json";
+            Directory.CreateDirectory(folder);
+            File.WriteAllText(url, JsonConvert.SerializeObject(order));
         }
     }
 }
