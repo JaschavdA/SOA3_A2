@@ -8,6 +8,6 @@ namespace Domain.ExportStrategies
 {
     public interface ExportStrategy
     {
-        void Export();
+        void Export(Order order);
     }
 }

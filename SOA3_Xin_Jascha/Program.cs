@@ -14,7 +14,6 @@
             var Ticket = new MovieTicket(Screening, false, 1, 1);
             Test.AddSeatReservation(Ticket);
             Test.Export(TicketExportFormat.JSON);
-
         }
     }
 }

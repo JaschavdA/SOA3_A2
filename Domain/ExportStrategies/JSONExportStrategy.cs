@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +11,10 @@ namespace Domain.ExportStrategies
     {
         public JSONExportStrategy() { }
 
-        public void Export()
+        public void Export(Order order)
         {
-            throw new NotImplementedException();
+            const string url = "C:\\Temp\\test.json";
+            File.WriteAllText(url, JsonConvert.SerializeObject(order));
         }
     }
 }

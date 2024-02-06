@@ -10,9 +10,9 @@ namespace Domain.ExportStrategies
     {
         public PlainTextExportStrategy() { }
 
-        public void Export()
+        public void Export(Order order)
         {
-            throw new NotImplementedException();
+            File.WriteAllText("C:\\Temp\\test.txt", this.ToString());
         }
     }
 }
