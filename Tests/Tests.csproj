@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\SOA3_Xin_Jascha\SOA3_Xin_Jascha.csproj" />
   </ItemGroup>
 
 </Project>

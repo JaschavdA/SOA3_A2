@@ -1,9 +1,5 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Domain.ExportStrategies;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain
 {
@@ -12,6 +8,8 @@ namespace Domain
         public int OrderNr { get; set; }
         public bool IsStudentOrder { get; set; }
         public List<MovieTicket> MovieTickets { get; set; }
+        
+        public ExportStrategy ExportStrategy { get; set; }
 
         public Order(int OrderNr, bool IsStudentOrder)
         {
@@ -90,12 +88,18 @@ namespace Domain
         {
             if (Format == TicketExportFormat.JSON)
             {
-                File.WriteAllText("C:\\Temp\\test.json", JsonConvert.SerializeObject(this));
+                setExportStrategy(new JSONExportStrategy());
             }
             else
             {
-                File.WriteAllText("C:\\Temp\\test.txt", this.ToString());
+                setExportStrategy(new PlainTextExportStrategy());
             }
+            this.ExportStrategy.Export(this);
+        }
+
+        public void setExportStrategy(ExportStrategy exportStrategy)
+        {
+            this.ExportStrategy = exportStrategy;
         }
 
         override
