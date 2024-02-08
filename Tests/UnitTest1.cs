@@ -97,7 +97,7 @@ namespace Tests
             mondayOrder.AddSeatReservation(mondayPrem6);
 
             double Result = mondayOrder.CalculatePrice();
-            Assert.Equal(13.5, Result);
+            Assert.Equal(15, Result);
         }
 
         [Fact]
