@@ -53,6 +53,11 @@ namespace Domain
             return "Order paid";
         }
 
+        private DateTime getEarliestDateOrder()
+        {
+            return MovieTickets.Min(ticket => ticket.GetMovieScreening().DateAndTime);
+        }
+
         public void Export(TicketExportFormat Format)
         {
             try
