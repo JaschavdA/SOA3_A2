@@ -12,7 +12,7 @@ namespace Domain
         public ExportStrategy? ExportStrategy { get; set; } = null;
         public CustomerType customerType { get; set; } = null;
 
-        public Order(int OrderNr, bool IsStudentOrder, CustomerType customerType)
+        public Order(int OrderNr, CustomerType customerType)
         {
             this.OrderNr = OrderNr;
             this.IsStudentOrder = IsStudentOrder;

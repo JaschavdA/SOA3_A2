@@ -15,7 +15,7 @@ namespace Tests
             MovieTicket premium2 = new MovieTicket(movieScreening, false, 1, 1);
             MovieTicket premium3 = new MovieTicket(movieScreening, false, 1, 1);
 
-            Order order = new Order(1, true, new StudentCustomer());
+            Order order = new Order(1, new StudentCustomer());
             order.AddSeatReservation(premium);
             order.AddSeatReservation(premium2);
             order.AddSeatReservation(premium3);
@@ -33,7 +33,7 @@ namespace Tests
 
             MovieScreening movieScreening = new MovieScreening(little_witch, monday, 3.0);
             MovieTicket premium = new MovieTicket(movieScreening, false, 1, 1);
-            Order order = new Order(1, true, new StudentCustomer());
+            Order order = new Order(1, new StudentCustomer());
             order.AddSeatReservation(premium);
             double FridayResult = order.CalculatePrice();
             Assert.Equal(3, FridayResult);
@@ -43,7 +43,7 @@ namespace Tests
         public void TestRegularWeekendNoDiscount()
         {
             DateTime friday = new DateTime(2024, 2, 2);
-            Order RegularFridayOrder = new Order(1, false, new RegularCustomer());
+            Order RegularFridayOrder = new Order(1, new RegularCustomer());
             Movie little_witch = new Movie("Little Witch Academia");
             MovieScreening movieScreening2 = new MovieScreening(little_witch, friday, 3.0);
             MovieTicket fridayPrem = new MovieTicket(movieScreening2, false, 1, 1);
@@ -61,7 +61,7 @@ namespace Tests
         public void TestRegularWeekDayNoDiscount()
         {
             DateTime monday = new DateTime(2024, 1, 29);
-            Order mondayOrder = new Order(1, false, new RegularCustomer());
+            Order mondayOrder = new Order(1, new RegularCustomer());
             Movie little_witch = new Movie("Little Witch Academia");
             MovieScreening movieScreening2 = new MovieScreening(little_witch, monday, 3.0);
             MovieTicket mondayPrem = new MovieTicket(movieScreening2, false, 1, 1);
@@ -79,7 +79,7 @@ namespace Tests
         public void TestRegularWeekDaySecondFreeDiscount()
         {
             DateTime monday = new DateTime(2024, 1, 29);
-            Order mondayOrder = new Order(1, false, new RegularCustomer());
+            Order mondayOrder = new Order(1, new RegularCustomer());
             Movie little_witch = new Movie("Little Witch Academia");
             MovieScreening movieScreening2 = new MovieScreening(little_witch, monday, 5.0);
             MovieTicket mondayPrem = new MovieTicket(movieScreening2, false, 1, 1);
@@ -104,7 +104,7 @@ namespace Tests
         public void TestRegularWeekendDiscount()
         {
             DateTime friday = new DateTime(2024, 2, 2);
-            Order mondayOrder = new Order(1, false, new RegularCustomer());
+            Order mondayOrder = new Order(1, new RegularCustomer());
             Movie little_witch = new Movie("Little Witch Academia");
             MovieScreening movieScreening2 = new MovieScreening(little_witch, friday, 5.0);
             MovieTicket mondayPrem = new MovieTicket(movieScreening2, false, 1, 1);
