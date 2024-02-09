@@ -30,6 +30,26 @@ namespace Domain
             return customerType.CalculatePrice(MovieTickets);
         }
 
+        public void reserveOrder()
+        {
+
+        }
+
+        public void changeOrder()
+        {
+
+        }
+
+        public void cancelOrder()
+        {
+
+        }
+
+        public void payOrder()
+        {
+
+        }
+
         public void Export(TicketExportFormat Format)
         {
             try
