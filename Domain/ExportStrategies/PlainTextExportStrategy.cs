@@ -14,7 +14,7 @@ namespace Domain.ExportStrategies
         public void Export(Order order)
         {
             const string folder = "C:\\export";
-            const string url = $"{folder}\\test.json";
+            const string url = $"{folder}\\test.txt";
             Directory.CreateDirectory(folder);
             File.WriteAllText(url, JsonConvert.SerializeObject(order));
         }
