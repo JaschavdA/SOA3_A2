@@ -10,17 +10,20 @@ namespace Domain.OrderStates
     {
         public string Cancel(Order order)
         {
-            throw new NotImplementedException();
+            string message = "Order canceled, canceled order can be seen in your order history";
+            Console.WriteLine(message);
+            return message;
         }
 
-        public string Change(Order order)
+        public Order Change(Order order)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Updated order returned");
+            return order;
         }
 
         public string Pay(Order order)
         {
-            throw new NotImplementedException();
+            throw new InvalidOperationException("Concept order cannot be paid, please reserve tickets first");
         }
 
         public string Reserve(Order order)
