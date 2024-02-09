@@ -1,6 +1,7 @@
 ﻿using Domain.CustomerTypes;
 using Domain.ExportStrategies;
 using System.Text;
+using Domain.OrderStates;
 
 namespace Domain
 {
@@ -12,12 +13,14 @@ namespace Domain
         public ExportStrategy? ExportStrategy { get; set; } = null;
         public CustomerType customerType { get; set; } = null;
 
+        public IOrderState state { get; set; } 
         public Order(int OrderNr, CustomerType customerType)
         {
             this.OrderNr = OrderNr;
             this.IsStudentOrder = IsStudentOrder;
             this.MovieTickets = new List<MovieTicket>();
             this.customerType = customerType;
+            this.state = new ConceptState();
         }
 
         public void AddSeatReservation(MovieTicket Ticket)

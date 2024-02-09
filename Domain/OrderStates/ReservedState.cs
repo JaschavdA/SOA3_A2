@@ -10,6 +10,7 @@ namespace Domain.OrderStates
     {
         public string Cancel(Order order)
         {
+            Console.WriteLine();
             throw new NotImplementedException();
         }
 
