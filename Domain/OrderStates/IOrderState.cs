@@ -8,10 +8,10 @@ namespace Domain.OrderStates
 {
     public interface IOrderState
     {
-        public string Submit();
-        public void AddReservation(MovieTicket ticket);
-        public int CalculatePrice(List<MovieTicket> tickets);
-        public void Export();
+        public string Reserve();
+        public void Change();
+        public int Pay();
+        public void Cancel();
 
     }
 }
