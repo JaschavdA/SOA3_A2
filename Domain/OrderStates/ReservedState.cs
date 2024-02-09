@@ -39,16 +39,7 @@ namespace Domain.OrderStates
 
         public string Reserve(Order order)
         {
-            foreach (var ticket in order.MovieTickets)
-            {
-                ticket.isAvailable = false;
-            }
-
-            string message = "Tickets have been reserved";
-            Console.WriteLine(message);
-            order.state = new ReservedState();
-            return message;
-
+            throw new InvalidOperationException("Cannot reserve a reserved order");
         }
     }
 }

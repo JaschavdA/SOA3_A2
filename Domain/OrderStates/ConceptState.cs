@@ -28,7 +28,15 @@ namespace Domain.OrderStates
 
         public string Reserve(Order order)
         {
-            throw new NotImplementedException();
+            foreach (var ticket in order.MovieTickets)
+            {
+                ticket.isAvailable = false;
+            }
+
+            string message = "Tickets have been reserved";
+            Console.WriteLine(message);
+            order.state = new ReservedState();
+            return message;
         }
     }
 }
