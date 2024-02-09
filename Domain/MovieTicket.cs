@@ -12,6 +12,7 @@ namespace Domain
         public int SeatNr { get; set; }
         public bool IsPremium { get; set; }
         public MovieScreening MovieScreening { get; set; }
+        public bool isAvailable { get; set; }
 
         public MovieTicket(MovieScreening MovieScreening, bool IsPremiumReservation, int SeatRow, int SeatNr)
         {
@@ -19,6 +20,7 @@ namespace Domain
             this.SeatNr = SeatNr;
             this.IsPremium = IsPremiumReservation;
             this.MovieScreening = MovieScreening;
+            this.isAvailable = true;
         }
 
         public bool IsPremiumTicket()

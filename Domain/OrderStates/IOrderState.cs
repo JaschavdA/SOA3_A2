@@ -9,7 +9,7 @@ namespace Domain.OrderStates
     public interface IOrderState
     {
         public string Reserve(Order order);
-        public string Change(Order order);
+        public Order Change(Order order);
         public string Pay(Order order);
         public string Cancel(Order order);
 
