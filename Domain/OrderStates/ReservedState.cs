@@ -30,11 +30,30 @@ namespace Domain.OrderStates
 
         public string Pay(Order order)
         {
+            if (!IsMoreThan12HoursBeforeScreening(order.MovieTickets))
+            {
+                order.state = new CanceledState();
+                throw new InvalidOperationException(
+                    "Order has not been paid and is within 12 hours of screening, order has been cancelled");
+            }
             string message = "$" + order.CalculatePrice() + " Has been paid";
             Console.WriteLine(message);
             order.state = new PaidState();
             return message;
 
+        }
+
+        private bool IsMoreThan12HoursBeforeScreening(List<MovieTicket> tickets)
+        {
+            var dateTime = DateTime.Now.AddHours(12);
+            foreach (var ticket in tickets)
+            {
+                if (ticket.MovieScreening.DateAndTime <= dateTime)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public string Reserve(Order order)
