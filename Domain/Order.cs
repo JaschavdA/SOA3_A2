@@ -40,6 +40,7 @@ namespace Domain
 
         public string changeOrder(Order changedOrder)
         {
+            //Changes order
             Order change = state.Change(changedOrder);
             this.MovieTickets = change.MovieTickets;
             return change.ToString();
