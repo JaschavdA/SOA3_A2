@@ -10,22 +10,22 @@ namespace Domain.OrderStates
     {
         public string Cancel(Order order)
         {
-            return "Order has been canceled";
+            throw new InvalidOperationException("Cannot cancel already canceled order");
         }
 
         public Order Change(Order order)
         {
-            throw new NotImplementedException();
+            throw new InvalidOperationException("Cannot change canceled order");
         }
 
         public string Pay(Order order)
         {
-            return "Canceled orders cannot be paid.";
+            throw new InvalidOperationException("Cannot pay for canceled order");
         }
 
         public string Reserve(Order order)
         {
-            return "Order has been reserved";
+            throw new InvalidOperationException("Canceled order cannot be reserved anymore");
         }
     }
 }

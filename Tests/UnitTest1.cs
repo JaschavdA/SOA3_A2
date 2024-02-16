@@ -1,5 +1,6 @@
 using Domain;
 using Domain.CustomerTypes;
+using Domain.OrderStates;
 
 namespace Tests
 {
@@ -125,6 +126,157 @@ namespace Tests
             Assert.Equal(27, Result);
         }
 
+        [Fact]
+        public void TestCanceledStatePayOrderShouldThrowException()
+        {
+            Order order = new Order(1, new RegularCustomer());
+            CanceledState canceledState = new CanceledState();
+            order.state = canceledState;
 
+            var exception = Assert.Throws<InvalidOperationException>(()=> order.payOrder());
+
+            Assert.Equal("Cannot pay for canceled order", exception.Message);
+        }
+
+        [Fact]
+        public void TestCanceledStateCancelOrder()
+        {
+            Order order = new Order(1, new RegularCustomer());
+            CanceledState canceledState = new CanceledState();
+            order.state = canceledState;
+
+            var exception = Assert.Throws<InvalidOperationException>(() => order.cancelOrder());
+
+            Assert.Equal("Cannot cancel already canceled order", exception.Message);
+        }
+
+        [Fact]
+        public void TestCanceledStateReserve()
+        {
+            Order order = new Order(1, new RegularCustomer());
+            CanceledState canceledState = new CanceledState();
+            order.state = canceledState;
+
+            var exception = Assert.Throws<InvalidOperationException>(() => order.reserveOrder());
+
+            Assert.Equal("Canceled order cannot be reserved anymore", exception.Message);
+        }
+
+        [Fact]
+        public void TestCanceledStateChangeOrder()
+        {
+            Order order = new Order(1, new RegularCustomer());
+            CanceledState canceledState = new CanceledState();
+            order.state = canceledState;
+
+            var exception = Assert.Throws<InvalidOperationException>(() => order.changeOrder(order));
+
+            Assert.Equal("Cannot change canceled order", exception.Message);
+        }
+
+        [Fact]
+        public void TestPaidStatePayOrderShouldThrowException()
+        {
+            Order order = new Order(1, new RegularCustomer());
+            PaidState paidState = new PaidState();
+            order.state = paidState;
+
+            var exception = Assert.Throws<InvalidOperationException>(() => order.payOrder());
+
+            Assert.Equal("Paid orders is already paid.", exception.Message);
+        }
+
+        [Fact]
+        public void TestPaidStateCancelOrder()
+        {
+            Order order = new Order(1, new RegularCustomer());
+            PaidState paidState = new PaidState();
+            order.state = paidState;
+
+            var exception = Assert.Throws<InvalidOperationException>(() => order.cancelOrder());
+
+            Assert.Equal("Paid order cannot be canceled", exception.Message);
+        }
+
+        [Fact]
+        public void TestPaidStateReserve()
+        {
+            Order order = new Order(1, new RegularCustomer());
+            PaidState paidState = new PaidState();
+            order.state = paidState;
+
+            var exception = Assert.Throws<InvalidOperationException>(() => order.reserveOrder());
+
+            Assert.Equal("Paid order has already been reserved", exception.Message);
+        }
+
+        [Fact]
+        public void TestPaidStateChangeOrder()
+        {
+            Order order = new Order(1, new RegularCustomer());
+            PaidState paidState = new PaidState();
+            order.state = paidState;
+
+            var exception = Assert.Throws<InvalidOperationException>(() => order.changeOrder(order));
+
+            Assert.Equal("Paid order cannot be changed.", exception.Message);
+        }
+
+        [Fact]
+        public void TestConceptStatePay()
+        {
+            Order order = new Order(1, new RegularCustomer());
+            ConceptState conceptState = new ConceptState();
+            order.state = conceptState;
+
+            var exception = Assert.Throws<InvalidOperationException>(() => order.payOrder());
+
+            Assert.Equal("Concept order cannot be paid, please reserve tickets first", exception.Message);
+        }
+
+        [Fact]
+        public void TestConceptStateCancelOrder()
+        {
+            Order order = new Order(1, new RegularCustomer());
+            ConceptState conceptState = new ConceptState();
+            order.state = conceptState;
+
+            var result = order.cancelOrder();
+
+            Assert.Equal("Order canceled, canceled order can be seen in your order history", result);
+        }
+
+        [Fact]
+        public void TestConceptStateReserve()
+        {
+            Order order = new Order(1, new RegularCustomer());
+            ConceptState conceptState = new ConceptState();
+            MovieScreening yourName = new MovieScreening(new Movie("Your name."), new DateTime(2026, 1, 1), 3.0);
+            MovieTicket yourNameTicket = new MovieTicket(yourName, true, 1, 1);
+            order.AddSeatReservation(yourNameTicket);
+
+            order.state = conceptState;
+
+            var result = order.reserveOrder();
+
+            Assert.Equal("Tickets have been reserved", result);
+            Assert.Equal(order.state.GetType().Name, "ReservedState");
+        }
+
+        [Fact]
+        public void TestConceptStateChangeOrder()
+        {
+            Order order = new Order(1, new RegularCustomer());
+            ConceptState conceptState = new ConceptState();
+            MovieScreening yourName = new MovieScreening(new Movie("Your name."), new DateTime(2026, 1, 1), 3.0);
+            MovieTicket yourNameTicket = new MovieTicket(yourName, true, 1, 1);
+            order.AddSeatReservation(yourNameTicket);
+
+            order.state = conceptState;
+
+            var result = order.changeOrder(order);
+
+            Assert.Equal("OrderNr: 1\nIs student order: False\nRowNr: 1\nSeatNr: 1\nIsPremium: True\nMovieScreening: DateTime: 1-1-2026 00:00:00\nPricePerSeat: 3\nMovie: Title: Your name.\n\n\n\n", result);
+        }
     }
 }
