@@ -35,22 +35,23 @@ namespace Domain
 
         public string reserveOrder()
         {
-            return "Order reserved";
+            return state.Reserve(this);
         }
 
-        public string changeOrder()
+        public string changeOrder(Order changedOrder)
         {
-            return "Order changed";
+            Order change = state.Change(changedOrder);
+            return change.ToString();
         }
 
         public string cancelOrder()
         {
-            return "Order canceled";
+            return state.Cancel(this);
         }
 
         public string payOrder()
         {
-            return "Order paid";
+            return state.Pay(this);
         }
 
         private DateTime getEarliestDateOrder()
