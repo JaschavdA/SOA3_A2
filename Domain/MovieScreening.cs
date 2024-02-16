@@ -28,7 +28,7 @@ namespace Domain
         public string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("DateTime: " + DateAndTime.ToString() + "\n");
+            sb.Append($"DateTime: {DateAndTime.Day}/{DateAndTime.Month}/{DateAndTime.Year}\n");
             sb.Append("PricePerSeat: " + PricePerSeat + "\n");
             sb.Append("Movie: " + this.Movie.ToString() + "\n");
             return sb.ToString();

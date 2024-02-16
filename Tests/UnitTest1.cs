@@ -276,7 +276,7 @@ namespace Tests
 
             var result = order.changeOrder(order);
 
-            Assert.Equal("OrderNr: 1\nIs student order: False\nRowNr: 1\nSeatNr: 1\nIsPremium: True\nMovieScreening: DateTime: 1-1-2026 00:00:00\nPricePerSeat: 3\nMovie: Title: Your name.\n\n\n\n", result);
+            Assert.Equal("OrderNr: 1\nIs student order: False\nRowNr: 1\nSeatNr: 1\nIsPremium: True\nMovieScreening: DateTime: 1/1/2026\nPricePerSeat: 3\nMovie: Title: Your name.\n\n\n\n", result);
         }
     }
 }
