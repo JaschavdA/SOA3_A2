@@ -13,9 +13,9 @@ namespace Domain.OrderStates
             return "Order has been canceled";
         }
 
-        public string Change(Order order)
+        public Order Change(Order order)
         {
-            return "Canceled order cannot be changed.";
+            throw new NotImplementedException();
         }
 
         public string Pay(Order order)
