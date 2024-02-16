@@ -17,7 +17,6 @@ namespace Tests
             var order = new Order(1, new RegularCustomer());
             order.state = new ReservedState();
             order.cancelOrder();
-            Console.WriteLine("henk");
             Assert.IsType<CanceledState>(order.state);
         }
 
