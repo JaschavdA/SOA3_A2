@@ -1,5 +1,7 @@
 using Domain;
+using Domain.Adapter;
 using Domain.CustomerTypes;
+using Domain.Observers;
 using Domain.OrderStates;
 
 namespace Tests
@@ -239,6 +241,13 @@ namespace Tests
         {
             Order order = new Order(1, new RegularCustomer());
             ConceptState conceptState = new ConceptState();
+            // Observer and adapter.
+            EmailAdapter emailAdapter = new EmailAdapter();
+            Subscribers sub1 = new Subscribers(emailAdapter);
+
+            // Apply sub to order
+            order.SubscribeTo(sub1);
+
             order.state = conceptState;
 
             var result = order.cancelOrder();
@@ -254,6 +263,13 @@ namespace Tests
             MovieScreening yourName = new MovieScreening(new Movie("Your name."), new DateTime(2026, 1, 1), 3.0);
             MovieTicket yourNameTicket = new MovieTicket(yourName, true, 1, 1);
             order.AddSeatReservation(yourNameTicket);
+
+            // Observer and adapter.
+            EmailAdapter emailAdapter = new EmailAdapter();
+            Subscribers sub1 = new Subscribers(emailAdapter);
+
+            // Apply sub to order
+            order.SubscribeTo(sub1);
 
             order.state = conceptState;
 
@@ -271,6 +287,13 @@ namespace Tests
             MovieScreening yourName = new MovieScreening(new Movie("Your name."), new DateTime(2026, 1, 1), 3.0);
             MovieTicket yourNameTicket = new MovieTicket(yourName, true, 1, 1);
             order.AddSeatReservation(yourNameTicket);
+
+            // Observer and adapter.
+            EmailAdapter emailAdapter = new EmailAdapter();
+            Subscribers sub1 = new Subscribers(emailAdapter);
+
+            // Apply sub to order
+            order.SubscribeTo(sub1);
 
             order.state = conceptState;
 

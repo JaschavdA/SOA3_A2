@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain;
+using Domain.Adapter;
 using Domain.CustomerTypes;
+using Domain.Observers;
 using Domain.OrderStates;
 
 namespace Tests
@@ -72,6 +74,14 @@ namespace Tests
             var ticket2 = new MovieTicket(screening2, false, 1, 2);
             order.MovieTickets.Add(ticket1);
             order.MovieTickets.Add(ticket2);
+
+            // Observer and adapter.
+            EmailAdapter emailAdapter = new EmailAdapter();
+            Subscribers sub1 = new Subscribers(emailAdapter);
+
+            // Apply sub to order
+            order.SubscribeTo(sub1);
+
             try
             {
                 order.payOrder();
@@ -94,7 +104,14 @@ namespace Tests
             var screening = new MovieScreening(movie, DateTime.Now.AddHours(13), 10);
             var ticket = new MovieTicket(screening, false, 1, 2);
             order.MovieTickets.Add(ticket);
-            
+
+            // Observer and adapter.
+            EmailAdapter emailAdapter = new EmailAdapter();
+            Subscribers sub1 = new Subscribers(emailAdapter);
+
+            // Apply sub to order
+            order.SubscribeTo(sub1);
+
             var result = order.payOrder();
             Assert.Equal("$10 Has been paid", result);
         }
