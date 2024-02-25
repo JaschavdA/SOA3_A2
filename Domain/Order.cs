@@ -38,7 +38,6 @@ namespace Domain
 
         public string reserveOrder()
         {
-            this.NotifyAll("Order has been reserved");
             return state.Reserve(this);
         }
 
@@ -47,7 +46,6 @@ namespace Domain
             //Changes order
             Order change = state.Change(changedOrder);
             this.MovieTickets = change.MovieTickets;
-            this.NotifyAll("Order has been updated to: " + change.ToString());
             return change.ToString();
         }
 

@@ -20,6 +20,7 @@ namespace Domain.OrderStates
         public Order Change(Order order)
         {
             Console.WriteLine("Updated order returned");
+            order.NotifyAll("Order has been changed");
             return order;
         }
 
@@ -36,6 +37,7 @@ namespace Domain.OrderStates
             }
 
             string message = "Tickets have been reserved";
+            order.NotifyAll(message);
             Console.WriteLine(message);
             order.state = new ReservedState();
             return message;

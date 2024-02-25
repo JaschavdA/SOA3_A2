@@ -26,6 +26,7 @@ namespace Domain.OrderStates
             {
                 ticket.isAvailable = false; 
             }
+            order.NotifyAll("Order has been updated to: " + order.ToString());
             return order;
 
         }
