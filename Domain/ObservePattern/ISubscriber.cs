@@ -6,14 +6,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Observers
 {
-    public abstract class ISubscriber
+    public interface ISubscriber
     {
-        private readonly Order order;
 
-        protected ISubscriber(Order order) {
-            this.order = order;
-        }
-
-        public abstract void Notify();
+        public void Notify(string message);
     }
 }

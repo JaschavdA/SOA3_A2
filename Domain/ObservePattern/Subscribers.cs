@@ -9,13 +9,19 @@ namespace Domain.Observers
     public class Subscribers : ISubscriber
     {
 
-        public Subscribers(Order order) : base(order)
+        public Subscribers()
         {
             
         }
-        public override void Notify()
+        public void Notify(string messageType)
         {
-            throw new NotImplementedException();
+            if (messageType.Equals("email"))
+            {
+                //Call email client
+            } else if (messageType.Equals("sms"))
+            {
+                //call sms client
+            }
         }
     }
 }
