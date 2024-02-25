@@ -7,31 +7,10 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    public abstract class OrderObservable
+    public interface OrderObservable
     {
-        private List<ISubscriber> SubscriberCount { get; set; } = new List<ISubscriber>();
-
-        public OrderObservable()
-        {
-            SubscriberCount = new List<ISubscriber>();
-        }
-
-        public void NotifyAll()
-        {
-            foreach (var subscriber in SubscriberCount)
-            {
-                subscriber.Notify();
-            }
-        }
-
-        void Subscribe(ISubscriber subscriber)
-        {
-            this.SubscriberCount.Add(subscriber);
-        }
-
-        void Unsubscribe(ISubscriber subscriber)
-        {
-            this.SubscriberCount.Remove(subscriber);
-        }
+        void SubscribeTo(ISubscriber subscriber);
+        void UnSubscribeTo(ISubscriber subscriber);
+        void NotifyAll();
     }
 }
