@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace Domain.Observers
 {
-    internal class Subscribers
+    public class Subscribers : ISubscriber
     {
+
+        public Subscribers(Order order) : base(order)
+        {
+            
+        }
+        public override void Notify()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

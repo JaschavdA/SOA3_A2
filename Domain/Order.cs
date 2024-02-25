@@ -2,10 +2,11 @@
 using Domain.ExportStrategies;
 using System.Text;
 using Domain.OrderStates;
+using Domain.Observers;
 
 namespace Domain
 {
-    public class Order
+    public class Order : OrderObservable
     {
         public int OrderNr { get; set; }
         public bool IsStudentOrder { get; set; }
@@ -14,6 +15,7 @@ namespace Domain
         public CustomerType customerType { get; set; } = null;
 
         public IOrderState state { get; set; } 
+        public List<ISubscriber> subscribers { get; set; }
         public Order(int OrderNr, CustomerType customerType)
         {
             this.OrderNr = OrderNr;
@@ -98,6 +100,21 @@ namespace Domain
                 sb.Append(t.ToString() + "\n");
             });
             return sb.ToString();
+        }
+
+        public void SubscribeTo(ISubscriber subscriber)
+        {
+            this.subscribers.Add(subscriber);
+        }
+
+        public void UnSubscribeTo(ISubscriber subscriber)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void NotifyAll()
+        {
+            throw new NotImplementedException();
         }
     }
 }
