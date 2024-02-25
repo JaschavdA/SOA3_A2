@@ -18,6 +18,7 @@ namespace Domain
 
         public IOrderState state { get; set; } 
         public List<ISubscriber> subscribers { get; set; }
+
         public Order(int OrderNr, CustomerType customerType)
         {
             this.OrderNr = OrderNr;
