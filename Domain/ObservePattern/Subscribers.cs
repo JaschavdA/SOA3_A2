@@ -8,20 +8,16 @@ namespace Domain.Observers
 {
     public class Subscribers : ISubscriber
     {
+        private readonly Order order;
 
-        public Subscribers()
+        public Subscribers(Order order)
         {
-            
+            this.order = order;    
         }
-        public void Notify(string messageType)
+        public void Notify(string message)
         {
-            if (messageType.Equals("email"))
-            {
-                //Call email client
-            } else if (messageType.Equals("sms"))
-            {
-                //call sms client
-            }
+            // Adapter converteerd bericht naar bericht.
+            // Adapter heeft referenties naar specifieke send client, bijvoorbeeld Outlook. En die verzend de bericht.
         }
     }
 }
