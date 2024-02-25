@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    public interface OrderObservable
+    public interface IOrderObservable
     {
         void SubscribeTo(ISubscriber subscriber);
         void UnSubscribeTo(ISubscriber subscriber);

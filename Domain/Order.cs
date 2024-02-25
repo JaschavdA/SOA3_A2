@@ -2,14 +2,17 @@
 using Domain.ExportStrategies;
 using System.Text;
 using Domain.OrderStates;
+using Domain.Observers;
 
 namespace Domain
 {
-    public class Order
+    public class Order: IOrderObservable
     {
         public int OrderNr { get; set; }
         public bool IsStudentOrder { get; set; }
         public List<MovieTicket> MovieTickets { get; set; }
+        public List<ISubscriber> SubscriberList { get; set; }
+
         public ExportStrategy? ExportStrategy { get; set; } = null;
         public CustomerType customerType { get; set; } = null;
 
@@ -21,6 +24,7 @@ namespace Domain
             this.MovieTickets = new List<MovieTicket>();
             this.customerType = customerType;
             this.state = new ConceptState();
+            SubscriberList = new List<ISubscriber>();
         }
 
         public void AddSeatReservation(MovieTicket Ticket)
@@ -86,6 +90,7 @@ namespace Domain
             this.ExportStrategy = exportStrategy;
         }
 
+        
         override
         public String ToString()
         {
@@ -97,6 +102,24 @@ namespace Domain
                 sb.Append(t.ToString() + "\n");
             });
             return sb.ToString();
+        }
+
+        public void SubscribeTo(ISubscriber subscriber)
+        {
+            SubscriberList.Add(subscriber);
+        }
+
+        public void UnSubscribeTo(ISubscriber subscriber)
+        {
+            SubscriberList.Remove(subscriber);
+        }
+
+        public void NotifyAll()
+        {
+            foreach (var sub in SubscriberList)
+            {
+                sub.Notify();
+            }
         }
     }
 }
