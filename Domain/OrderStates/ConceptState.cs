@@ -12,6 +12,8 @@ namespace Domain.OrderStates
         {
             string message = "Order canceled, canceled order can be seen in your order history";
             Console.WriteLine(message);
+
+            order.NotifyAll("Order has been canceled. I am sorry for changing your mind. Should your mother have done that about you");
             return message;
         }
 

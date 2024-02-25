@@ -14,6 +14,8 @@ namespace Domain.OrderStates
             string message = "Order canceled, canceled order can be seen in your order history";
             Console.WriteLine(message);
             order.state = new CanceledState();
+
+            order.NotifyAll("Order has been canceled. Thank you for your visit. Ass.");
             return message;
         }
 
@@ -38,6 +40,8 @@ namespace Domain.OrderStates
             }
             string message = "$" + order.CalculatePrice() + " Has been paid";
             Console.WriteLine(message);
+
+            order.NotifyAll("Order has been paid. Have a nice movie!");
             order.state = new PaidState();
             return message;
 
