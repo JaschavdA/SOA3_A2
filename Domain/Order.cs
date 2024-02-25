@@ -6,11 +6,13 @@ using Domain.Observers;
 
 namespace Domain
 {
-    public class Order : OrderObservable
+    public class Order: IOrderObservable
     {
         public int OrderNr { get; set; }
         public bool IsStudentOrder { get; set; }
         public List<MovieTicket> MovieTickets { get; set; }
+        public List<ISubscriber> SubscriberList { get; set; }
+
         public ExportStrategy? ExportStrategy { get; set; } = null;
         public CustomerType customerType { get; set; } = null;
 
@@ -23,6 +25,7 @@ namespace Domain
             this.MovieTickets = new List<MovieTicket>();
             this.customerType = customerType;
             this.state = new ConceptState();
+            SubscriberList = new List<ISubscriber>();
         }
 
         public void AddSeatReservation(MovieTicket Ticket)
@@ -89,6 +92,7 @@ namespace Domain
             this.ExportStrategy = exportStrategy;
         }
 
+        
         override
         public String ToString()
         {
@@ -104,17 +108,20 @@ namespace Domain
 
         public void SubscribeTo(ISubscriber subscriber)
         {
-            this.subscribers.Add(subscriber);
+            SubscriberList.Add(subscriber);
         }
 
         public void UnSubscribeTo(ISubscriber subscriber)
         {
-            throw new NotImplementedException();
+            SubscriberList.Remove(subscriber);
         }
 
         public void NotifyAll()
         {
-            throw new NotImplementedException();
+            foreach (var sub in SubscriberList)
+            {
+                sub.Notify();
+            }
         }
     }
 }
