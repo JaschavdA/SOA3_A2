@@ -117,11 +117,11 @@ namespace Domain
             SubscriberList.Remove(subscriber);
         }
 
-        public void NotifyAll()
+        public void NotifyAll(string message)
         {
             foreach (var sub in SubscriberList)
             {
-                sub.Notify();
+                sub.Notify(message);
             }
         }
     }
