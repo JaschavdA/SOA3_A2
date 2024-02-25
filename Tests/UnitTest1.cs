@@ -289,7 +289,7 @@ namespace Tests
             order.AddSeatReservation(yourNameTicket);
 
             // Observer and adapter.
-            EmailAdapter emailAdapter = new EmailAdapter();
+            IAdapter emailAdapter = new SMSAdapter();
             Subscribers sub1 = new Subscribers(emailAdapter);
 
             // Apply sub to order
