@@ -12,13 +12,10 @@ namespace Domain
         public bool IsStudentOrder { get; set; }
         public List<MovieTicket> MovieTickets { get; set; }
         public List<ISubscriber> SubscriberList { get; set; }
-
         public ExportStrategy? ExportStrategy { get; set; } = null;
         public CustomerType customerType { get; set; } = null;
-
         public IOrderState state { get; set; } 
         public List<ISubscriber> subscribers { get; set; }
-
         public Order(int OrderNr, CustomerType customerType)
         {
             this.OrderNr = OrderNr;
