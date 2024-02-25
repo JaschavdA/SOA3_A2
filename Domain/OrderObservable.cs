@@ -11,6 +11,6 @@ namespace Domain
     {
         void SubscribeTo(ISubscriber subscriber);
         void UnSubscribeTo(ISubscriber subscriber);
-        void NotifyAll();
+        void NotifyAll(string message);
     }
 }
